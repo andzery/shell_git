@@ -1,0 +1,43 @@
+#!/bin/bash
+#save as restoreTrash
+for file in $@
+do
+originalPath=$(awk /$file/'{print $4}' "$HOME/trash/.log")
+
+filenameNow=$(awk /$file/'{print $1}'  ~/trash/.log )
+filenamebefore=$(awk /$file/'{print $2}' ~/trash/.log)
+echo "you are about to restore $filenameNow, original name is $filenamebefore"
+echo "original path is $originalPath"
+
+echo "Are you sure to do that?[Y/N]"
+ read reply
+ if [ $reply = "y" ] || [ $reply = "Y" ]
+  then
+    $(mv -b "$HOME/trash/$file" "$originalPath")
+    $(sed -i /$filenameNow/'d' "$HOME/trash/.log")
+  else
+    echo "no files restored"
+fi  
+done
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
